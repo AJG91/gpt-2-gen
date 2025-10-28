@@ -2,7 +2,7 @@
 
 [my-website]: https://AJG91.github.io "my-website"
 
-This repository showcases how language models such as GPT-2/3 generate text. In the process, you will learn how to fine-tune such models.
+This repository showcases how language models such as GPT-2/3 generate text. In the process, you will learn how to fine-tune a custom GPT-2 generator.
 
 ## Getting Started
 
