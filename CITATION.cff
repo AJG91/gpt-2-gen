@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "GPT-Style Language Model"
+version: 0.1.0
+date-released: 2025-10-27
+authors:
+  - family-names: Garcia
+    given-names: Alberto
+license: "MIT"
+repository-code: "https://github.com/AJG91/gpt-2-gen"
