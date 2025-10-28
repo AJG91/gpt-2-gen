@@ -1,0 +1,17 @@
+name: gpt-2-gen-env
+
+channels:
+  - conda-forge
+  - defaults
+  
+dependencies:
+  - python=3.12
+  - numpy=2.3
+  - pytorch=2.6.0
+  - matplotlib=3.10
+  - jupyter=1.1
+  - pip
+  - pip:
+      - datasets==4.1.1
+      - transformers==4.56.2
+      - accelerate>=0.26.0
