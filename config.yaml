@@ -1,0 +1,5 @@
+model_name: "gpt2"
+prompt: "The future of physics is"
+seed: 42
+dpi: 400
+fig_path: "../outputs/"
