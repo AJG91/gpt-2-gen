@@ -3,16 +3,56 @@ import numpy as np
 import random
 import yaml
 from types import SimpleNamespace
-
 from typing import Any, Dict
 
-def to_device(inputs, device):
-    """ """
+def to_device(
+    inputs: dict[str, Any], 
+    device: tc.device
+) -> dict[str, Any]:
+    """
+    Moves tensor values in dictionary to specified device.
+
+    Parameters
+    ----------
+    inputs : dict[str, Any]
+        Dictionary of input data containing tensors and possibly
+        other types of values.
+    device : tc.device
+        Device that tensors will be moved to.
+
+    Returns
+    -------
+    dict[str, Any]
+        Returns dictionary with all tensors moved to specified device.
+    """
     return {k: (v.to(device) if tc.is_tensor(v) else v) for k, v in inputs.items()}
 
-def get_device():
-    """ """
-    return tc.device("mps") if tc.backends.mps.is_available() else tc.device("cpu")
+def get_device(mps: bool=False):
+    """
+    Finds available devices.
+
+    Checks if Apple Metal Performance Shaders (MPS) is available on the system.
+    If True, returns the MPS device.
+    If False, defaults to the CPU.
+
+    Parameters
+    ----------
+    mps : bool, optional (default= False)
+        Allows the function to check for MPS.
+        If True, function checks for MPS.
+        If False, function defaults to CPU.
+        Used for when we always want to use CPU, but 
+        do not want to remove the function from the code.
+    
+    Returns
+    -------
+    tc.device
+        Best available device: `"mps"` if available, otherwise `"cpu"`.
+    """
+    if mps:
+        return tc.device("mps") if tc.backends.mps.is_available() else tc.device("cpu")
+    else:
+        return tc.device("cpu")
 
 def set_seed(seed: int = 42) -> None:
     """
