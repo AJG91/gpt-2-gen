@@ -3,7 +3,7 @@ import numpy as np
 import random
 import yaml
 from types import SimpleNamespace
-from typing import Any, Dict
+from typing import Any
 
 def to_device(
     inputs: dict[str, Any], 
@@ -27,17 +27,17 @@ def to_device(
     """
     return {k: (v.to(device) if tc.is_tensor(v) else v) for k, v in inputs.items()}
 
-def get_device(mps: bool=False):
+def get_device(mps: bool=True):
     """
     Finds available devices.
 
     Checks if Apple Metal Performance Shaders (MPS) is available on the system.
-    If True, returns the MPS device.
-    If False, defaults to the CPU.
+    If True, checks for the MPS device; if not found, defaults to CPU.
+    If False, automatically defaults to the CPU.
 
     Parameters
     ----------
-    mps : bool, optional (default= False)
+    mps : bool, optional (default=True)
         Allows the function to check for MPS.
         If True, function checks for MPS.
         If False, function defaults to CPU.
@@ -74,7 +74,7 @@ def set_seed(seed: int = 42) -> None:
     if tc.cuda.is_available():
         tc.cuda.manual_seed_all(seed)
 
-def load_config(path: str = "config.yaml") -> Dict[str, Any]:
+def load_config(path: str = "config.yaml") -> dict[str, Any]:
     """
     Reads a YAML file from the given path and returns its contents as a Python dictionary. 
 
