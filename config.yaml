@@ -1,5 +1,18 @@
 model_name: "gpt2"
 prompt: "The future of physics is"
+
 seed: 42
-dpi: 400
+max_token_len: 128
+train_size: 2000
+val_size: 1000
+lr: 0.00002
+epochs: 3
+train_batch_size: 4
+eval_batch_size: 4
+save_step: 250
+eval_step: 250
+log_step: 100
+strategy: "epoch"
+
 fig_path: "../outputs/"
+res_path: "../results/"
