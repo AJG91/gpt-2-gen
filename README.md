@@ -24,7 +24,7 @@ See [my website][my-website] for examples on how to use this code.
 If you use this project, please use the citation information provided by GitHub via the **“Cite this repository”** button or cite it as follows:
 
 ```bibtex
-@software{gpt_2_gen_2025,
+@software{Garcia2025GPT2Gen,
   author = {Alberto Garcia},
   title = {GPT-Style Language Model},
   year = {2025},
