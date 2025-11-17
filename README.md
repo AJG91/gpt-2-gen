@@ -25,7 +25,7 @@ If you use this project, please use the citation information provided by GitHub 
 
 ```bibtex
 @software{Garcia2025GPT2Gen,
-  author = {Alberto Garcia},
+  author = {Alberto J. Garcia},
   title = {GPT-Style Language Model},
   year = {2025},
   publisher = {GitHub},
