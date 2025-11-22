@@ -9,7 +9,7 @@ from datasets import Dataset, DatasetDict
 from typing import Union
 from gpt_2_gen.utils import get_device, to_device
 
-class CausalLM():
+class CausalTextGeneration():
     """
     A class for loading and managing a tokenizer and decoder model.
 
@@ -190,7 +190,7 @@ class CausalLM():
     
     def evaluate_model(
         self,
-        inputs,
+        prompt: Union[list[str], str],
         model: PreTrainedModel,
         max_new_tokens: int = 25,
         do_sample: bool = True,
@@ -200,7 +200,42 @@ class CausalLM():
         repetition_penalty: Union[int, float] = 1.1
     ) -> Union[tc.Tensor, GenerateOutput]:
         """
+        Tokenizes an input prompt, puts the model in evaluation model, and generates 
+        text based on the given prompt.
+        
+        Parameters
+        ----------
+        prompt : Union[list[str], str]
+            Can be a list of prompts or a single prompt.
+        model : PreTrainedModel
+            A causal language model instance.
+        max_new_tokens : int, optional(default=25)
+            Total amount of tokens that will be used in the text generation.
+        do_sample : bool, optional (default=True)
+            Tells model to sample from probability distribution instead of 
+            picking the highest-probability token.
+            If False, deterministic.
+            If True, random sampling.
+        top_k : int, optional (default=25)
+            Sorts logits, keeps top N most probably tokens, and samples from those.
+            Lower k -> more deterministic.
+            Higher k -> more random.
+        top_p : float, optional (default=0.95)
+            Keeps the smallest set of tokens whose cumulative probability >= N.
+        temperature : float, optional (default=0.7)
+            Denotes the fraction of temperature that will be used when sampling.
+            Lower T -> more deterministic.
+            Higher T -> more random.
+        repetition_penalty : Union[int, float], optional (default=1.1)
+            Specifies how much penalty will be added to the model when repeating text.
+
+        Returns
+        -------
+        Union[tc.Tensor, GenerateOutput]
+            Tokens representing the generated text from the model.
         """
+        inputs = self.tokenize_text(prompt)
+
         model.eval()
         with tc.no_grad():
             outputs = model.generate(
